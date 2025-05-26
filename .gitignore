@@ -1,0 +1,9 @@
+# Ignore node_modules in both server and client
+client/node_modules/
+server/node_modules/
+
+# Optional ignores
+dist/
+.env
+.DS_Store
+package-lock.json
