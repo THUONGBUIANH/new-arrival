@@ -1,77 +1,97 @@
-import { Heart } from 'lucide-react';
+import { useMemo, useCallback } from 'react';
+import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useGetProductsQuery } from '@/queries/product.queries';
-
-interface ProductCardProps {
-  name: string;
-  tier: string;
-  price: string;
-}
-
-const ProductCard = ({ name, tier, price }: ProductCardProps) => {
-  return (
-    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-      {/* Product Image Placeholder */}
-      <div className="aspect-square border-b border-gray-200 bg-gray-50 relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full h-full relative">
-            <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-300 rotate-45 origin-top-left transform translate-y-[50%]"></div>
-            <div className="absolute top-0 right-0 w-full h-0.5 bg-gray-300 -rotate-45 origin-top-right transform translate-y-[50%]"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Product Info */}
-      <div className="p-4 space-y-2">
-        <div className="flex justify-between items-start">
-          <div className="space-y-1">
-            <h3 className="font-medium text-gray-900">{name}</h3>
-            <p className="text-sm text-gray-600">{tier}</p>
-            <p className="text-sm font-medium text-gray-900">{price}</p>
-          </div>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-red-500">
-            <Heart className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { useInfiniteProductsQuery } from '@/queries/product.queries';
+import { useFilterContext } from '@/contexts/FilterContext';
+import type { Product } from '@/types/product';
+import VirtualGrid from './components/VirtualGrid';
 
 const ProductGrid = () => {
-  const products = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    name: 'Name',
-    tier: 'Tier',
-    price: '0:00 ETH',
-  }));
+  const { filters } = useFilterContext();
 
-  const { data: productDataList, isError, error } = useGetProductsQuery();
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useInfiniteProductsQuery(filters);
 
-  console.log('productDataList', productDataList);
+  // Flatten all pages into a single array
+  const allProducts = useMemo(() => {
+    return data?.pages.flatMap((page: Product[]) => page) || [];
+  }, [data]);
+
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isError) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-red-500 mb-4">
+          Error loading products: {error?.message || 'Unknown error'}
+        </div>
+        <Button onClick={() => refetch()} variant="default">
+          Try Again
+        </Button>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <Loader2 className="w-6 h-6 animate-spin" />
+        <span className="ml-2">Loading products...</span>
+      </div>
+    );
+  }
+
+  if (allProducts.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-500">No products found matching your criteria.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-full bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              tier={product.tier}
-              price={product.price}
-            />
-          ))}
-        </div>
-
-        {/* View More Button */}
+    <div className="w-full">
+      {/* Product Grid - Use virtual list for performance when many products */}
+      <VirtualGrid products={allProducts} />
+      {/* Load More Button */}
+      {hasNextPage && (
         <div className="text-center">
-          <Button variant="outline" className="px-8 border-gray-300">
-            View More
+          <Button
+            variant="outline"
+            className="px-8 border-gray-300"
+            onClick={handleLoadMore}
+            disabled={isFetchingNextPage}
+          >
+            {isFetchingNextPage ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                Loading...
+              </>
+            ) : (
+              'View More'
+            )}
           </Button>
         </div>
-      </div>
+      )}
+
+      {/* Results summary */}
+      {allProducts.length > 0 && (
+        <div className="text-center py-4 text-sm text-gray-500">
+          Showing {allProducts.length} products (using virtual scrolling for performance)
+        </div>
+      )}
     </div>
   );
 };

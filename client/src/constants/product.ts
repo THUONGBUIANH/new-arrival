@@ -26,8 +26,9 @@ export const PRODUCT_THEMES: SelectOption[] = [
   { value: 'minimalist', label: 'Minimalist' },
 ];
 
-export const PRODUCT_PRICE_RANGES: SelectOption[] = [
-  { value: 'low', label: '0-1 ETH' },
-  { value: 'medium', label: '1-5 ETH' },
-  { value: 'high', label: '5+ ETH' },
+export const PRODUCT_SORT_OPTIONS: SelectOption[] = [
+  { value: 'price-asc', label: 'Price: Low to High' },
+  { value: 'price-desc', label: 'Price: High to Low' },
+  { value: 'createdAt-asc', label: 'Date: Oldest First' },
+  { value: 'createdAt-desc', label: 'Date: Newest First' },
 ];

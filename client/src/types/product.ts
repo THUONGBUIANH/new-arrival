@@ -25,10 +25,12 @@ export interface Product {
 export type ProductSort = 'price' | 'createdAt';
 export type Order = 'asc' | 'desc';
 export interface ProductFilter {
-  q?: string;
+  q?: string | null;
   category?: string | null;
-  _sort?: ProductSort;
-  _order?: Order;
+  tier?: string | null;
+  theme?: string | null;
+  _sort?: ProductSort | null;
+  _order?: Order | null;
   _page?: number;
   _limit?: number;
 }
