@@ -13,17 +13,16 @@ export const PRODUCT_CATEGORIES = [
 ] as const;
 
 export const PRODUCT_TIERS: SelectOption[] = [
-  { value: 'basic', label: 'Basic' },
-  { value: 'premium', label: 'Premium' },
-  { value: 'luxury', label: 'Luxury' },
+  { value: 'Basic', label: 'Basic' },
+  { value: 'Premium', label: 'Premium' },
+  { value: 'Deluxe', label: 'Deluxe' },
 ];
 
 export const PRODUCT_THEMES: SelectOption[] = [
-  { value: 'cyberpunk', label: 'Cyberpunk' },
-  { value: 'fantasy', label: 'Fantasy' },
-  { value: 'modern', label: 'Modern' },
-  { value: 'retro', label: 'Retro' },
-  { value: 'minimalist', label: 'Minimalist' },
+  { value: 'Dark', label: 'Dark' },
+  { value: 'Light', label: 'Light' },
+  { value: 'Halloween', label: 'Halloween' },
+  { value: 'Colorful', label: 'Colorful' },
 ];
 
 export const PRODUCT_SORT_OPTIONS: SelectOption[] = [
