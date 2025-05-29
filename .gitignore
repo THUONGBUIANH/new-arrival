@@ -2,6 +2,9 @@
 client/node_modules/
 server/node_modules/
 
+client/coverage/
+client/coverage-final/
+
 # Optional ignores
 dist/
 .env
