@@ -84,8 +84,9 @@ const FilterSection = ({ children }: FilterSectionProps) => {
 
             {/* Sort Options */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Sort By</label>
+              <label htmlFor="sort-select" className="text-sm font-medium text-gray-700">Sort By</label>
               <Select 
+                id="sort-select"
                 placeholder="Select sorting" 
                 options={PRODUCT_SORT_OPTIONS}
                 value={currentSortValue}
@@ -95,8 +96,9 @@ const FilterSection = ({ children }: FilterSectionProps) => {
 
             {/* Tier */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Tier</label>
+              <label htmlFor="tier-select" className="text-sm font-medium text-gray-700">Tier</label>
               <Select 
+                id="tier-select"
                 placeholder="Select tier" 
                 options={PRODUCT_TIERS}
                 value={filters.tier || ''}
@@ -106,8 +108,9 @@ const FilterSection = ({ children }: FilterSectionProps) => {
 
             {/* Theme */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Theme</label>
+              <label htmlFor="theme-select" className="text-sm font-medium text-gray-700">Theme</label>
               <Select 
+                id="theme-select"
                 placeholder="Select theme" 
                 options={PRODUCT_THEMES}
                 value={filters.theme || ''}

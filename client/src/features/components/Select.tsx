@@ -12,9 +12,10 @@ type SelectProps = {
   options: SelectOption[];
   onValueChange?: (value: string) => void;
   value?: string;
+  id?: string;
 };
 
-const Select = ({ placeholder, options, onValueChange, value }: SelectProps) => {
+const Select = ({ placeholder, options, onValueChange, value, id }: SelectProps) => {
   const handleValueChange = (value: string) => {
     if (onValueChange) {
       onValueChange(value);
@@ -23,7 +24,7 @@ const Select = ({ placeholder, options, onValueChange, value }: SelectProps) => 
 
   return (
     <SelectShadcn onValueChange={handleValueChange} value={value}>
-      <SelectTrigger className="border-gray-300 w-full">
+      <SelectTrigger id={id} className="border-gray-300 w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
