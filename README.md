@@ -1,94 +1,123 @@
-# New Arrival Project
+# New Arrival - Full Stack Application
 
-This is a full-stack application with a React frontend and Node.js backend.
+A full-stack application with a React client and JSON server backend, organized as an npm workspace.
 
 ## Project Structure
 
 ```
 new-arrival/
-├── client/          # React frontend application
-└── server/          # Node.js backend server
+├── client/          # React + Vite + TypeScript frontend
+├── server/          # JSON Server backend
+├── package.json     # Root workspace configuration
+└── README.md        # This file
 ```
 
-## Prerequisites
+## Quick Start
 
-- Node.js (v18 or higher)
-- npm (v9 or higher)
+### Prerequisites
+- Node.js >= 16.0.0
+- npm >= 8.0.0
 
-## Setup Instructions
-
-### 1. Clone the Repository
-
+### Installation
 ```bash
-git clone <repository-url>
-cd new-arrival
+# Install all dependencies for both client and server
+npm run install:all
 ```
 
-### 2. Frontend Setup (Client)
+### Development
 
+**🚀 Start both client and server with one command:**
 ```bash
-cd client
-npm install
-```
-
-### 3. Backend Setup (Server)
-
-```bash
-cd server
-npm install
-```
-
-## Running the Application
-
-### Development Mode
-
-1. Start the backend server:
-```bash
-cd server
 npm start
 ```
+This will run both the frontend (usually on http://localhost:5173) and backend server concurrently.
 
-2. In a new terminal, start the frontend development server:
+### Individual Commands
+
 ```bash
-cd client
+# Run only the client (React app)
+npm run dev:client
+
+# Run only the server (JSON server)
+npm run dev:server
+
+# Run dev script in all workspaces
 npm run dev
-```
 
-The frontend will be available at `http://localhost:5173` (or another port if 5173 is in use)
-
-### Building for Production
-
-1. Build the frontend:
-```bash
-cd client
+# Build the client for production
 npm run build
+
+# Run tests (client only)
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests coverage report
+npm run test:coverage
+
+# Run linting
+npm run lint
 ```
 
-## Available Scripts
+### Workspace Commands
 
-### Frontend (Client)
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run lint` - Run ESLint
-- `npm run preview` - Preview production build
+You can also run commands directly in specific workspaces:
 
-### Backend (Server)
-- `npm start` - Start the server
+```bash
+# Install dependencies in a specific workspace
+npm install <package> --workspace=client
+npm install <package> --workspace=server
 
-## Technologies Used
+# Run scripts in specific workspaces
+npm run <script> --workspace=client
+npm run <script> --workspace=server
+```
 
-### Frontend
-- React
+## Available Scripts Summary
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | 🚀 **Main command** - Runs both client and server |
+| `npm run dev` | Runs dev scripts in all workspaces |
+| `npm run dev:client` | Runs only the React client |
+| `npm run dev:server` | Runs only the JSON server |
+| `npm run build` | Builds the client for production |
+| `npm run test` | Runs client tests |
+| `npm run test:watch` | Runs client tests in watch mode |
+| `npm run test:coverage` | Runs client tests with |
+| `npm run lint` | Runs ESLint on client code |
+| `npm run install:all` | Installs dependencies for all workspaces |
+
+## Technology Stack
+
+### Client
+- React 19
 - TypeScript
 - Vite
-- TailwindCSS
+- Tailwind CSS
+- Radix UI
 - React Query
-- ESLint
-- Prettier
+- Jest for testing
 
-### Backend
+### Server
 - Node.js
 - JSON Server
+
+## Development Workflow
+
+1. **Initial Setup**: Run `npm run install:all` to install all dependencies
+2. **Development**: Use `npm start` to run both client and server
+3. **Testing**: Use `npm run test` or `npm run test:watch` for client tests
+4. **Building**: Use `npm run build` to create production build for client
+5. **Individual Development**: Use `npm run dev:client` or `npm run dev:server` to run them separately
+
+## Notes
+
+- The workspace is configured to run both client and server simultaneously using `concurrently`
+- Client typically runs on http://localhost:5173
+- Server typically runs on http://localhost:5005
+- All workspace dependencies are managed from the root level
 
 ## Code Formatting
 

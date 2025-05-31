@@ -1,3 +1,5 @@
+/node_modules
+
 # Ignore node_modules in both server and client
 client/node_modules/
 server/node_modules/
