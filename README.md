@@ -85,7 +85,7 @@ npm run <script> --workspace=server
 | `npm run build` | Builds the client for production |
 | `npm run test` | Runs client tests |
 | `npm run test:watch` | Runs client tests in watch mode |
-| `npm run test:coverage` | Runs client tests with |
+| `npm run test:coverage` | Runs client tests coverage |
 | `npm run lint` | Runs ESLint on client code |
 | `npm run install:all` | Installs dependencies for all workspaces |
 
@@ -96,7 +96,7 @@ npm run <script> --workspace=server
 - TypeScript
 - Vite
 - Tailwind CSS
-- Radix UI
+- Shadcn UI
 - React Query
 - Jest for testing
 
