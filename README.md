@@ -98,7 +98,7 @@ npm run <script> --workspace=server
 - Tailwind CSS
 - Shadcn UI
 - React Query
-- Jest for testing
+- Jest + React Testing library for testing
 
 ### Server
 - Node.js

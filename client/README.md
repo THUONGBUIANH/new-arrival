@@ -30,6 +30,7 @@ npm run lint
 - **React Query** - Server state management
 - **Shadcn UI** - Component primitives
 - **Jest** - Testing framework
+- **React Testing Library** - Testing with React components
 
 ## 📁 Project Structure
 
